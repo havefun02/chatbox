@@ -2,14 +2,12 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
-import { useSelector } from 'react-redux';
-import { authSlice, selectAuthState } from '@/store/authSlide';
-import { useDispatch } from 'react-redux/es/exports';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAuthState, setAuthState } from '@/store/authSlider';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-  const auth = useSelector(selectAuthState);
+  const authState = useSelector(selectAuthState);
   const dispatch = useDispatch();
   return (
     <>
@@ -21,11 +19,11 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.description}>
-          <div>{auth ? <h2>log</h2> : <h2>out</h2>}</div>
+          {authState ? <h2>hello world</h2> : <h2>im out</h2>}
           <div>
             <button
               onClick={() => {
-                dispatch(authSlice.actions.setAuthState(true));
+                dispatch(setAuthState(true));
               }}
             >
               login
@@ -34,7 +32,7 @@ export default function Home() {
           <div>
             <button
               onClick={() => {
-                dispatch(authSlice.actions.setAuthState(false));
+                dispatch(setAuthState(false));
               }}
             >
               logout
