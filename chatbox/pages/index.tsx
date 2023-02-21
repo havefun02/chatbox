@@ -4,11 +4,16 @@ import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthState, setAuthState } from '@/store/authSlider';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const authState = useSelector(selectAuthState);
   const dispatch = useDispatch();
+  const router = useRouter();
+  const pid = router.query.id as string;
+
   return (
     <>
       <Head>
@@ -38,6 +43,8 @@ export default function Home() {
               logout
             </button>
           </div>
+          <Link href={`/page`}>page1</Link>
+          <Link href={`/page/2`}>page2</Link>
         </div>
       </main>
     </>
